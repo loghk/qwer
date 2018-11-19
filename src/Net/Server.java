@@ -3,10 +3,12 @@ package Net;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Server {
     public static int count = 0;
-
     public static void main(String[] args) throws IOException {
         ServerSocket serverSocket = new ServerSocket(8088);
         System.out.println("Server Start!");
@@ -36,11 +38,10 @@ class Serversup implements Runnable{
                 PrintStream ps = new PrintStream(os);
                 ){
             while ((temp = Read())!=null){
-                //System.out.println(temp);
                 ps.println(temp);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (IOException e){
+            System.out.println("Client has closed");
         }
     }
 
