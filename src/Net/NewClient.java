@@ -5,13 +5,14 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class NewClient {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         String temp = new String();
         Socket socket = null;
         try {
             socket = new Socket("localhost",6666);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("server is not exist");
+            return;
         }
         new Thread(new NewClientsup(socket)).start();
         Scanner scanner = new Scanner(System.in);
@@ -33,9 +34,13 @@ class NewClientsup implements Runnable{
     private Socket socket;
     private BufferedReader br;
     private String temp;
-    public NewClientsup(Socket socket) throws IOException{
+    public NewClientsup(Socket socket){
         this.socket = socket;
-        br = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        try {
+            br = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
