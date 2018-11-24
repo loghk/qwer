@@ -16,8 +16,6 @@ public class Work2 {
 }
 
 class MyCalculator {
-    double number;
-
     Frame frame = new Frame("计算器");
     TextArea textArea = new TextArea(1, 1);
     Panel panel = new Panel();
@@ -72,8 +70,7 @@ class MyCalculator {
         buttons[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                textArea.setText("");
-                number = 0;
+                textArea.setText(null);
             }
         });
         // +/-
@@ -81,7 +78,6 @@ class MyCalculator {
             @Override
             public void mouseClicked(MouseEvent e) {
                 textArea.setText("-" + textArea.getText());
-                number = 0 - number;
             }
         });
         // %
@@ -209,6 +205,10 @@ class MyCalculator {
     }
 
     public void mathematics(String string) {
+        if (string.equals("520/0")){
+            textArea.setText("我爱你，宝贝媳妇！");
+            return;
+        }
         String[] str = string.split("[+*/\\-]");
         System.out.println(Arrays.toString(str));
         double num1 = Double.valueOf(str[0]);
