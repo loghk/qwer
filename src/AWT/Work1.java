@@ -2,6 +2,7 @@ package AWT;
 /*
 * 随机数生成器，图形界面
 * */
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,7 +23,7 @@ class Event {
     Button stop = new Button("Stop");
     Button begin = new Button("Begin");
     TextArea text = new TextArea(1, 1);
-
+    Boolean flag = true;
     public void init() {
         frame.setSize(800, 800);
         Panel panel = new Panel();
@@ -40,14 +41,14 @@ class Event {
         stop.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                textThread.suspend();
+                flag = false;
             }
         });
 
         begin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                textThread.resume();
+                flag = true;
             }
         });
 
@@ -61,16 +62,24 @@ class Event {
 
     class TextThread extends Thread{
         Random random = new Random();
+        int i= 0;
         @Override
         public void run() {
-            while (true){
-                text.setFont(new Font("黑体", Font.BOLD, 500));
+            while (true) {
+                while (flag){
+                    text.setFont(new Font("黑体", Font.BOLD, 500));
+                    try {
+                        Thread.sleep(20);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    text.setText(String.valueOf(random.nextInt(50)));
+                }
                 try {
-                    Thread.sleep(20);
+                    Thread.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                text.setText(String.valueOf(random.nextInt(50)));
             }
         }
 
