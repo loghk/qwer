@@ -1,10 +1,8 @@
 package AWT;
 
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class Work2 {
@@ -205,28 +203,39 @@ class MyCalculator {
     }
 
     public void mathematics(String string) {
-        if (string.equals("520/0")){
-            textArea.setText("我爱你，宝贝媳妇！");
-            return;
-        }
         String[] str = string.split("[+*/\\-]");
         System.out.println(Arrays.toString(str));
-        double num1 = Double.valueOf(str[0]);
-        double num2 = Double.valueOf(str[1]);
+        /*double num1 = Double.valueOf(str[0]);
+        double num2 = Double.valueOf(str[1]);*/
+        BigDecimal num1 = new BigDecimal(str[0]);
+        BigDecimal num2 = new BigDecimal(str[1]);
         char[] temp = string.toCharArray();
         char sign = '1';
-        for (char c : temp){
-            if (c=='+'||c=='-'||c=='*'||c=='/'){
+        for (char c : temp) {
+            if (c == '+' || c == '-' || c == '*' || c == '/') {
                 sign = c;
             }
         }
-        double ans = 0.0;
-        switch (sign){
-            case '+': ans = num1+num2;break;
-            case '-': ans = num1-num2;break;
-            case '*': ans = num1*num2;break;
-            case '/': ans = num1/num2;break;
+        BigDecimal ans = null;
+        try {
+            switch (sign) {
+                case '+':
+                    ans = num1.add(num2);
+                    break;
+                case '-':
+                    ans = num1.subtract(num2);
+                    break;
+                case '*':
+                    ans = num1.multiply(num2);
+                    break;
+                case '/':
+                    ans = num1.divide(num2);
+                    break;
+            }
+        } catch (Exception e) {
+            textArea.setText("格式不正确");
+            return;
         }
-        textArea.setText(String.valueOf(ans));
+        textArea.setText(ans.toString());
     }
 }
