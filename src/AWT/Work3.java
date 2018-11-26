@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.Random;
 /*
 *   可以用一个数组储存每个方块信息，画一个方块方阵，实现打方块游戏;
+*   
 * */
 public class Work3 {
     public static void main(String[] args)
