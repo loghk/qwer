@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
-
+/*
+*   可以用一个数组储存每个方块信息，画一个方块方阵，实现打方块游戏;
+* */
 public class Work3 {
     public static void main(String[] args)
     {
@@ -18,15 +20,15 @@ class Game{
     private final int circleSize = 15;
     private final int ban_hight = 20;
     private final int ban_width = 100;
-    private final int size_hight = 600;
+    private final int size_hight = 800;
     private final int size_width = 400;
-    private final int ban_speed = 50;
+    private final int ban_speed = ban_width-1;
     private int ban_x_location = (size_width-ban_width)/2;
     private int ban_y_location = size_hight-100;
     Random random = new Random();
     private int x_location = random.nextInt(200)+50;
     private int y_location = random.nextInt(100)+50;
-    private int x_speed = 5;
+    private int x_speed = 10;
     private int y_speed = (int) (x_speed*1.5);
     private Frame frame = new Frame("小球");
     private Dialog dialog = new Dialog(frame, "你输了", false);
@@ -56,9 +58,17 @@ class Game{
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode()==KeyEvent.VK_LEFT&&ban_x_location>0){
+                    if (ban_x_location-ban_speed<=0){
+                        ban_x_location = 0;
+                    }
+                    else
                     ban_x_location -= ban_speed;
                 }
-                if (e.getKeyCode()==KeyEvent.VK_RIGHT&&ban_x_location<size_width-ban_width){
+                if (e.getKeyCode()==KeyEvent.VK_RIGHT&&ban_x_location+ban_width<size_width){
+                    if (ban_x_location+ban_width+ban_speed>=size_width){
+                        ban_x_location = size_width-ban_width;
+                    }
+                    else
                     ban_x_location += ban_speed;
                 }
             }
