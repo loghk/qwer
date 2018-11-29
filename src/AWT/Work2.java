@@ -3,6 +3,8 @@ package AWT;
 import java.awt.*;
 import java.awt.event.*;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 public class Work2 {
@@ -209,6 +211,7 @@ class MyCalculator {
         double num2 = Double.valueOf(str[1]);*/
         BigDecimal num1 = new BigDecimal(str[0]);
         BigDecimal num2 = new BigDecimal(str[1]);
+        MathContext mathContext = new MathContext(str[0].length()*2,RoundingMode.HALF_UP);
         char[] temp = string.toCharArray();
         char sign = '1';
         for (char c : temp) {
@@ -229,10 +232,10 @@ class MyCalculator {
                     ans = num1.multiply(num2);
                     break;
                 case '/':
-                    ans = num1.divide(num2);
+                    ans = num1.divide(num2,mathContext);
                     break;
             }
-        } catch (Exception e) {
+        } catch (ArithmeticException e) {
             textArea.setText("格式不正确");
             return;
         }
