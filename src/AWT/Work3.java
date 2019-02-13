@@ -79,13 +79,18 @@ class Game {
                     } else
                         ban_x_location += ban_speed;
                 }
-                if (e.getKeyCode() == KeyEvent.VK_UP&&ban_y_location<700){
-                    ban_y_location += ban_speed;
-                }
-                if (e.getKeyCode()==KeyEvent.VK_DOWN&&ban_y_location+ban_hight<=size_hight){
-                    if (ban_y_location+ban_hight+ban_speed>=size_hight){
-                        ban_y_location = size_hight-ban_hight;
+                if (e.getKeyCode() == KeyEvent.VK_UP&&ban_y_location>=0){
+                    if (ban_y_location -ban_speed<=0){
+                        ban_y_location = 0;
                     }
+                    else
+                    ban_y_location -= ban_speed;
+                }
+                if (e.getKeyCode()==KeyEvent.VK_DOWN||e.getKeyCode()==KeyEvent.VK_KP_DOWN){
+                    if (ban_y_location+ban_hight+ban_speed>=size_hight){
+                        ban_y_location = size_hight-ban_hight-30;
+                    }
+                    else
                     ban_y_location += ban_speed;
                 }
             }
@@ -123,10 +128,10 @@ class Game {
             if (y_location + circleSize >= ban_y_location && x_location >= ban_x_location && x_location <= ban_x_location + ban_width) {
                 y_speed = -y_speed;
             }
-//            if (y_location >= ban_y_location) {
-//                timer.stop();
-//                dialog.setVisible(true);
-//            }
+            if (y_location >= ban_y_location) {
+                timer.stop();
+                dialog.setVisible(true);
+            }
             if ((temp = isTouch())!=null){
                 temp.size = 0;
             }
@@ -138,7 +143,7 @@ class Game {
             y_location += y_speed;
             myCancas.repaint();
         };
-        timer = new Timer(1, AL);
+        timer = new Timer(10, AL);
         timer.start();
     }
 
