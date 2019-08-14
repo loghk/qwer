@@ -6,7 +6,7 @@ public class test1 {
     public static void main(String[] args) throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         String url = "jdbc:mysql://localhost:3306/xupt?useSSL=false&serverTimezone=UTC";
-        Connection con = DriverManager.getConnection(url, "root", "19970307sxz");
+        Connection con = DriverManager.getConnection(url, "root", "");
         select(con);
         transaction(con);
         System.out.println();
