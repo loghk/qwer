@@ -12,7 +12,7 @@ public class test2 {
         ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         ds.setUrl("jdbc:mysql://localhost:3306/xupt?useSSL=false&serverTimezone=UTC");
         ds.setUsername("root");
-        ds.setPassword("19970307sxz");
+        ds.setPassword("");
         ds.setMaxActive(1000);
         ds.setInitialSize(100);
         ds.setTestWhileIdle(false);
